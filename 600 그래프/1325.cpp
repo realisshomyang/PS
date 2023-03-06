@@ -1,28 +1,72 @@
 #include <iostream>
-#include <queue>
+#include <vector>
 #include <algorithm>
+#include <cstring>
 using namespace std;
-vector<vector<int>> computers(100001);
 
-int n, m;
-int adj[10000][10000];
+const int MAX = 10000 + 1;
 
-int main()
+int N, M;
+vector<int> graph[MAX];
+bool visited[MAX];
+int cnt = 0;
+
+void DFS(int nodeNum)
 {
-    scanf("%d %d", &n, &m);
-    for (int i = 1; i < n + 1; i++)
+    visited[nodeNum] = true;
+
+    for (int i = 0; i < graph[nodeNum].size(); i++)
     {
-        for (int j = 1; j < n + 1; j++)
+        int next = graph[nodeNum][i];
+
+        if (!visited[next])
         {
-            adj[i][j] = 0;
+            cnt++;
+            DFS(next);
+        }
+    }
+}
+
+int main(void)
+{
+    ios_base::sync_with_stdio(0);
+    cin.tie(0); // cin 속도 향상 위해
+    cin >> N >> M;
+
+    for (int i = 0; i < M; i++)
+    {
+        int node1, node2;
+        cin >> node1 >> node2;
+
+        graph[node2].push_back(node1);
+    }
+
+    int nodeCnt = 0;
+    vector<int> result;
+
+    for (int i = 1; i <= N; i++)
+    {
+        memset(visited, false, sizeof(visited));
+        cnt = 0;
+
+        DFS(i);
+
+        if (nodeCnt == cnt)
+            result.push_back(cnt);
+        if (nodeCnt < cnt)
+        {
+            nodeCnt = cnt;
+            result.clear();
+            result.push_back(i);
         }
     }
 
-    for (int i = 1; i < m + 1; i++)
+    sort(result.begin(), result.end());
+    for (int i = 0; i < result.size(); i++)
     {
-        int a, b;
-        scanf("%d %d", &a, &b);
-        adj[a][b] = 1;
-        adj[b][a] = 1;
+        cout << result[i] << " ";
     }
+    cout << endl;
+
+    return 0;
 }

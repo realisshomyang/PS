@@ -1,6 +1,6 @@
 import sys
 from collections import deque
-input = sys.stdin.readline
+n, m = map(int, sys.stdin.readline().split())
 
 
 def bfs(s):
@@ -18,12 +18,10 @@ def bfs(s):
     return cnt
 
 
-n, m = map(int, input().split())
-
 graph = [[] for _ in range(n+1)]
 
 for _ in range(m):
-    a, b = map(int, input().split())
+    a, b = map(int, sys.stdin.readline().split())
     graph[b].append(a)
 
 maxc = 1
