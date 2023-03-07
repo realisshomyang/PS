@@ -28,7 +28,6 @@ void bfs(int sNode)
     queue<int> q;
     q.push(sNode);
     visited[sNode] = true;
-
     while (!q.empty())
     {
         int x = q.front();
