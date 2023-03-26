@@ -24,7 +24,6 @@ int d_q(int x, int y, int n)
             }
         }
     }
-
     if (countw == total)
     {
         white++;
