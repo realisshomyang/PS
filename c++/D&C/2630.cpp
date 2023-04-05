@@ -6,7 +6,6 @@ int map[129][129];
 int d_q(int x, int y, int n)
 {
     int countw = 0;
-
     int countb = 0;
     int total = n * n;
 

@@ -14,28 +14,32 @@ int main()
     {
         cin >> jw[i][0] >> jw[i][1];
     }
+    for (int i = 0; i <= K; i++)
+    {
+        dp[0][i] = 0;
+    }
     int res = 0;
 
     for (int i = 1; i <= N; i++)
     {
-        for (int j = 1; j <= K; j++)
+        for (int j = 0; j <= K; j++)
         {
-            if (j < jw[i][0])
+            if (j == jw[i][0])
             {
-                dp[i][j] = dp[i - 1][j];
+                dp[i][j] = jw[i][1];
             }
-            else if (j >= jw[i][0])
+            else if (j > jw[i][0])
             {
                 dp[i][j] = max(jw[i][1] + dp[i - 1][j - jw[i][0]], dp[i - 1][j]);
                 res = max(res, dp[i][j]);
             }
         }
     }
-    for (int i = 0; i <= N; i++)
+    for (int i = 1; i <= N; i++)
     {
-        for (int j = 0; j <= K; j++)
+        for (int j = 1; j <= K; j++)
         {
-            cout << dp[i][j] << " ";
+            cout << dp[i][j];
         }
         cout << endl;
     }
